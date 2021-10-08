@@ -5,6 +5,10 @@ metadata:
   labels:
     app: busybox
 spec:
+  volumes:
+  - name: pvstorage
+    persistentVolumeClaim:
+      claimName: busybox-pv-claim
   containers:
   - image: docker.io/indk00r/my-repo:1.1
     command:
@@ -13,3 +17,6 @@ spec:
     imagePullPolicy: IfNotPresent
     name: mybusybox
   restartPolicy: Always
+  volumeMounts:
+    - mountPath: "/mnt"
+      name: pvstorage
